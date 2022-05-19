@@ -5,11 +5,12 @@
 ### **Projects covered so far**
 - [Clean Architecture Notes App with Testing](https://github.com/YashKr01/Compose-Notes-App-with-Testing)
 - [Clean Architecture Dictionar app with Caching](https://github.com/YashKr01/Compose-Playground/tree/dictionary)
+- [Meditation UI](https://github.com/YashKr01/Compose-Playground/tree/meditation_ui)
 
 ### **Samples**
-| Clean Architecture Notes App | Clean Arch Dictionary App with Caching |
- --------------|------------|
- | ![](samples/video_notes.gif) | ![](samples/video_dictionary.gif)  |
+| Meditation UI | Clean Arch Dictionary </br> with Caching | Clean Arch Notes |
+ --------------|------------|------------|
+ | <img height="350" align="center" src="samples/image_meditation_ui.jpg" /> | <img height="350" src="samples/video_dictionary.gif" />| <img height="350" src="samples/video_notes.gif" /> |
 
 ### **LICENSE**
 
