@@ -23,9 +23,7 @@ import com.example.composeplayground.presentation.coin_list.CoinListViewModel
 import com.google.accompanist.flowlayout.FlowRow
 
 @Composable
-fun CoinDetailScreen(
-    viewModel: CoinDetailViewModel = hiltViewModel()
-) {
+fun CoinDetailScreen(viewModel: CoinDetailViewModel = hiltViewModel()) {
 
     val state = viewModel.state.value
 
