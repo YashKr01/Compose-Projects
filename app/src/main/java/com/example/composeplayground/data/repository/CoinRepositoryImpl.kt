@@ -6,7 +6,7 @@ import com.example.composeplayground.data.remote.dto.CoinDto
 import com.example.composeplayground.domain.repository.CoinRepository
 import javax.inject.Inject
 
-class CoinRepositoryImpl @Inject constructor(private val api :CoinPaprikaApi):CoinRepository {
+class CoinRepositoryImpl @Inject constructor(private val api: CoinPaprikaApi) : CoinRepository {
 
     override suspend fun getCoins(): List<CoinDto> {
         return api.getCoins()
