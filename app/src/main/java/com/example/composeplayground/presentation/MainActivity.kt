@@ -1,4 +1,4 @@
-package com.example.composeplayground
+package com.example.composeplayground.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
