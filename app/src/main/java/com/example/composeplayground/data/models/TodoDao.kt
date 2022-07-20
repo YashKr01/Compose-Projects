@@ -12,7 +12,7 @@ interface TodoDao {
     @Query("SELECT * FROM todo_table WHERE id=:taskId")
     fun getSelectedTask(taskId: Int): Flow<TodoTask>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addTask(toDoTask: TodoTask)
 
     @Update
