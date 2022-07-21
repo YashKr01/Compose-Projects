@@ -1,13 +1,14 @@
-package com.example.composeplayground.navigation
+package com.example.composeplayground.navigation.screens
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import com.example.composeplayground.data.utils.Constants
+import com.example.composeplayground.ui.theme.screen.ListScreen
 
 fun NavGraphBuilder.listComposable(
-    navigateToTaskScreen: (Int) -> Unit,
+    navigateToTaskScreen: (Int) -> Unit
 ) {
     composable(
         route = Constants.LIST_SCREEN,
@@ -15,6 +16,6 @@ fun NavGraphBuilder.listComposable(
             type = NavType.StringType
         })
     ) {
-
+        ListScreen(navigateToTaskScreen = navigateToTaskScreen)
     }
 }

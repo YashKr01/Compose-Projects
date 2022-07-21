@@ -5,6 +5,8 @@ import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.example.composeplayground.data.utils.Constants
+import com.example.composeplayground.navigation.screens.listComposable
+import com.example.composeplayground.navigation.screens.taskComposable
 
 @Composable
 fun setupNavigation(

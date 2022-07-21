@@ -1,4 +1,4 @@
-package com.example.composeplayground.navigation
+package com.example.composeplayground.navigation.screens
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
