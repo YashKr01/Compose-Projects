@@ -3,9 +3,9 @@
 - Will be maintaining & adding new projects branch-wise in this repository
 
 ### **Samples**
-| Clean Arch Stock App |
------------------------|
-| <img height="350" align="center" src="samples/video_stock_app.gif" /> |
+| Clean Arch Stock App | Grocery App UI |
+-----------------------|-----------------------|
+| <img height="350" align="center" src="samples/video_stock_app.gif" /> | <img height="350" align="center" src="samples/grocery.jpeg" /> |
 
 | Clean Architecture </br> CryptoCurrency App | Clean Architecture </br> Form Validation| Clean Arch Dictionary </br> with Caching | Clean Arch Notes |
 ------------|------------|------------|------------|
