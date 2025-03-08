@@ -56,8 +56,6 @@ fun ListContent(
     navHostController: NavHostController
 ) {
 
-    Log.d("ListContent", "ListContent: ${heroes.loadState}")
-
     val result = handlePagingResult(heroes = heroes)
 
     if (result) {
@@ -220,8 +218,10 @@ fun handlePagingResult(heroes: LazyPagingItems<Hero>): Boolean {
                 ShimmerEffect()
                 false
             }
-
-            error != null -> false
+            error != null -> {
+                EmptyScreen(error)
+                false
+            }
             else -> true
         }
 

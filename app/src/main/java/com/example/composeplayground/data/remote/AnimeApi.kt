@@ -9,7 +9,7 @@ interface AnimeApi {
     @GET("/anime-x/heroes")
     suspend fun getAllHeroes(@Query("page") page: Int = 1): ApiResponse
 
-    @GET("anime-x/heroes/search")
+    @GET("/anime-x/heroes/search")
     suspend fun searchHeroes(@Query("name") name: String): ApiResponse
 
 }
