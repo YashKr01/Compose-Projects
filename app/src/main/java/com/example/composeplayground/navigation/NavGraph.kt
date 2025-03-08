@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.composeplayground.presentation.screens.welcome.WelcomeScreen
 import com.example.composeplayground.presentation.screens.home.HomeScreen
+import com.example.composeplayground.presentation.screens.search.SearchScreen
 import com.example.composeplayground.presentation.screens.splash.SplashScreen
 import com.example.composeplayground.utils.Constants
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -30,6 +31,6 @@ fun SetupNavGraph(navController: NavHostController) {
                 type = NavType.IntType
             })
         ) { }
-        composable(route = Screen.Search.route) { }
+        composable(route = Screen.Search.route) { SearchScreen() }
     }
 }
