@@ -15,4 +15,6 @@ class Repository @Inject constructor(
 
     fun readOnboardingState() = dataStore.readOnboardingState()
 
+    fun searchHeroes(query: String) = remote.searchHeroes(query)
+
 }

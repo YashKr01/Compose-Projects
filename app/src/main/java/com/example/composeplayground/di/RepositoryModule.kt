@@ -7,6 +7,7 @@ import com.example.composeplayground.domain.repository.DataStore
 import com.example.composeplayground.domain.usecases.GetAllHeroesUseCase
 import com.example.composeplayground.domain.usecases.ReadOnboardingUseCase
 import com.example.composeplayground.domain.usecases.SaveOnboardingUseCase
+import com.example.composeplayground.domain.usecases.SearchHeroesUseCase
 import com.example.composeplayground.domain.usecases.UseCases
 import dagger.Module
 import dagger.Provides
@@ -33,7 +34,8 @@ object RepositoryModule {
         return UseCases(
             saveOnboardingUseCase = SaveOnboardingUseCase(repository),
             readOnboardingUseCase = ReadOnboardingUseCase(repository),
-            getAllHeroesUseCase = GetAllHeroesUseCase(repository)
+            getAllHeroesUseCase = GetAllHeroesUseCase(repository),
+            searchHeroesUseCase = SearchHeroesUseCase(repository)
         )
     }
 
