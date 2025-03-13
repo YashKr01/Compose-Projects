@@ -1,19 +1,26 @@
 package com.example.composeplayground.presentation.screens.search
 
-import android.annotation.SuppressLint
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SearchScreen() {
+fun SearchScreen(
+    searchViewModel: SearchViewModel = hiltViewModel(),
+    navController: NavController
+) {
+
+    val searchQuery by searchViewModel.searchQuery
+
     Scaffold(
         topBar = {
             SearchTopBar(
-                text = "",
-                onTextChange = { },
+                text = searchQuery,
+                onTextChange = { searchViewModel.updateSearchQuery(query = it) },
                 onSearchClicked = { },
-                onCloseClicked = { }
+                onCloseClicked = { navController.popBackStack() }
             )
         }
     ) { }

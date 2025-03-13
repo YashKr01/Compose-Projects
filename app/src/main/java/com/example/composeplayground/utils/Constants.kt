@@ -14,6 +14,6 @@ object Constants {
 
     const val PREFERENCES_KEY = "onboaring_completed"
 
-    const val BASE_URL = "http://0.0.0.0:8082"
+    const val BASE_URL = "http://127.0.0.1:8081"
 
 }

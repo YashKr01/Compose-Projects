@@ -31,6 +31,6 @@ fun SetupNavGraph(navController: NavHostController) {
                 type = NavType.IntType
             })
         ) { }
-        composable(route = Screen.Search.route) { SearchScreen() }
+        composable(route = Screen.Search.route) { SearchScreen(navController = navController) }
     }
 }
