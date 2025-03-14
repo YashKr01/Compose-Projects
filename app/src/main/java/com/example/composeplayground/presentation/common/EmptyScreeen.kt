@@ -38,12 +38,19 @@ import java.net.SocketTimeoutException
 import kotlin.math.log
 
 @Composable
-fun EmptyScreen(error: LoadState.Error) {
-    val message by remember {
-        mutableStateOf(parseErrorMessage(error))
+fun EmptyScreen(error: LoadState.Error? = null) {
+
+    var message by remember {
+        mutableStateOf("Find your favourite Hero! ")
     }
-    val icon by remember {
-        mutableIntStateOf(R.drawable.ic_network_error)
+
+    var icon by remember {
+        mutableIntStateOf(R.drawable.ic_search_document)
+    }
+
+    if (error != null) {
+        message = parseErrorMessage(error)
+        icon = R.drawable.ic_network_error
     }
 
     var startAnimation by remember { mutableStateOf(false) }

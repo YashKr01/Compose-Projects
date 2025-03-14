@@ -7,7 +7,6 @@ import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.composeplayground.navigation.Screen
 import com.example.composeplayground.presentation.common.ListContent
-import com.example.composeplayground.presentation.screens.search.SearchScreen
 
 @Composable
 fun HomeScreen(
