@@ -11,6 +11,10 @@
 ------------|------------|------------|------------|
 | <img height="350" align="center" src="samples/video_crypto.gif" /> | <img height="350" align="center" src="samples/video_validation.gif" /> | <img height="350" align="center" src="samples/video_dictionary.gif" /> | <img height="350" src="samples/video_notes.gif" /> |
 
+| Anime Characters |
+| ------------ |
+| <img height="350" align="center" src="samples/video_crypto.gif" /> |
+
 ### **LICENSE**
 
 ```
