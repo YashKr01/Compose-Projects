@@ -7,7 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.composeplayground.presentation.details.DetailsScreen
+import com.example.composeplayground.presentation.screens.details.DetailsScreen
 import com.example.composeplayground.presentation.screens.welcome.WelcomeScreen
 import com.example.composeplayground.presentation.screens.home.HomeScreen
 import com.example.composeplayground.presentation.screens.search.SearchScreen
