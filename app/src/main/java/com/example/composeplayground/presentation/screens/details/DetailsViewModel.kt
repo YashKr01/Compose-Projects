@@ -10,6 +10,8 @@ import com.example.composeplayground.domain.usecases.UseCases
 import com.example.composeplayground.utils.Constants.DETAILS_ARGUMENT_KEY
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,8 +21,8 @@ class DetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ): ViewModel() {
 
-    private val _selectedHero = mutableStateOf<Hero?>(null)
-    val selectedHero: State<Hero?> = _selectedHero
+    private val _selectedHero = MutableStateFlow<Hero?>(null)
+    val selectedHero: StateFlow<Hero?> = _selectedHero
 
     init {
         viewModelScope.launch(Dispatchers.IO) {

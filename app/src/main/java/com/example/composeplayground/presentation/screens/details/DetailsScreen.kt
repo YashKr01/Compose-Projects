@@ -1,6 +1,8 @@
 package com.example.composeplayground.presentation.screens.details
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 
@@ -10,8 +12,11 @@ fun DetailsScreen(
     detailsViewModel: DetailsViewModel = hiltViewModel()
 ) {
 
-    val selectedHero = detailsViewModel.selectedHero.value
+    val selectedHero by detailsViewModel.selectedHero.collectAsState()
 
-
+    DetailsContent(
+        navController,
+        selectedHero
+    )
 
 }
