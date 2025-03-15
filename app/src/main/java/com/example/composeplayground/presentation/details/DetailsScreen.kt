@@ -6,4 +6,6 @@ import androidx.navigation.NavHostController
 @Composable
 fun DetailsScreen(modifier: NavHostController) {
 
+
+
 }

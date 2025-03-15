@@ -5,6 +5,7 @@ import com.example.composeplayground.data.repository.DataStoreImpl
 import com.example.composeplayground.data.repository.Repository
 import com.example.composeplayground.domain.repository.DataStore
 import com.example.composeplayground.domain.usecases.GetAllHeroesUseCase
+import com.example.composeplayground.domain.usecases.GetSelectedHeroUseCase
 import com.example.composeplayground.domain.usecases.ReadOnboardingUseCase
 import com.example.composeplayground.domain.usecases.SaveOnboardingUseCase
 import com.example.composeplayground.domain.usecases.SearchHeroesUseCase
@@ -35,7 +36,8 @@ object RepositoryModule {
             saveOnboardingUseCase = SaveOnboardingUseCase(repository),
             readOnboardingUseCase = ReadOnboardingUseCase(repository),
             getAllHeroesUseCase = GetAllHeroesUseCase(repository),
-            searchHeroesUseCase = SearchHeroesUseCase(repository)
+            searchHeroesUseCase = SearchHeroesUseCase(repository),
+            getSelectedHeroesUseCase = GetSelectedHeroUseCase(repository)
         )
     }
 

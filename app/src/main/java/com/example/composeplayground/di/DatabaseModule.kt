@@ -3,6 +3,8 @@ package com.example.composeplayground.di
 import android.content.Context
 import androidx.room.Room
 import com.example.composeplayground.data.local.AnimeDatabase
+import com.example.composeplayground.data.repository.LocalDataSourceImpl
+import com.example.composeplayground.domain.repository.LocalDataSource
 import com.example.composeplayground.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -27,14 +29,12 @@ object DatabaseModule {
         ).build()
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideLocalDataSource(
-//        database: AnimeDatabase
-//    ): LocalDataSource {
-//        return LocalDataSourceImpl(
-//            borutoDatabase = database
-//        )
-//    }
+    @Provides
+    @Singleton
+    fun provideLocalDataSource(
+        database: AnimeDatabase
+    ): LocalDataSource {
+        return LocalDataSourceImpl(database)
+    }
 
 }

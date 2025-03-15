@@ -5,4 +5,5 @@ data class UseCases(
     val saveOnboardingUseCase: SaveOnboardingUseCase,
     val getAllHeroesUseCase: GetAllHeroesUseCase,
     val searchHeroesUseCase: SearchHeroesUseCase,
+    val getSelectedHeroesUseCase: GetSelectedHeroUseCase,
 )
