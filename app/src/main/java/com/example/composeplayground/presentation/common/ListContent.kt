@@ -25,6 +25,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -35,7 +37,9 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import coil.annotation.ExperimentalCoilApi
+import coil.compose.AsyncImage
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
 import com.example.composeplayground.R
 import com.example.composeplayground.domain.model.Hero
 import com.example.composeplayground.navigation.Screen
@@ -76,18 +80,12 @@ fun ListContent(
 
 }
 
-@OptIn(ExperimentalCoilApi::class)
+@ExperimentalCoilApi
 @Composable
 fun HeroItem(
     hero: Hero,
     navHostController: NavHostController
 ) {
-
-    val painter = rememberImagePainter(data = "$BASE_URL${hero.image}") {
-        placeholder(R.drawable.placeholder)
-        error(R.drawable.placeholder)
-    }
-
     Box(
         modifier = Modifier
             .height(HERO_ITEM_HEIGHT)
@@ -96,15 +94,15 @@ fun HeroItem(
             },
         contentAlignment = Alignment.BottomStart
     ) {
-        Surface(
-            shape = RoundedCornerShape(
-                size = LARGE_PADDING
-            )
-        ) {
-            Image(
+        Surface(shape = RoundedCornerShape(size = LARGE_PADDING)) {
+            AsyncImage(
                 modifier = Modifier.fillMaxSize(),
-                painter = painter,
-                contentDescription = "Hero Image",
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(data = "$BASE_URL${hero.image}")
+                    .placeholder(drawableResId = R.drawable.ic_placeholder)
+                    .error(drawableResId = R.drawable.ic_placeholder)
+                    .build(),
+                contentDescription = stringResource(id = R.string.hero_image),
                 contentScale = ContentScale.Crop
             )
         }
@@ -112,7 +110,7 @@ fun HeroItem(
             modifier = Modifier
                 .fillMaxHeight(0.4f)
                 .fillMaxWidth(),
-            color = Color.Black.copy(alpha = ContentAlpha.medium),
+            color = Color.Black.copy(alpha = 0.5f),
             shape = RoundedCornerShape(
                 bottomStart = LARGE_PADDING,
                 bottomEnd = LARGE_PADDING
@@ -139,25 +137,22 @@ fun HeroItem(
                     overflow = TextOverflow.Ellipsis
                 )
                 Row(
-                    modifier = Modifier
-                        .padding(top = SMALL_PADDING),
+                    modifier = Modifier.padding(top = SMALL_PADDING),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     RatingWidget(
-                        modifier = Modifier
-                            .padding(end = SMALL_PADDING),
+                        modifier = Modifier.padding(end = SMALL_PADDING),
                         rating = hero.rating
                     )
                     Text(
                         text = "(${hero.rating})",
                         textAlign = TextAlign.Center,
-                        color = Color.White.copy(alpha = ContentAlpha.medium),
+                        color = Color.White.copy(alpha = 0.5f)
                     )
                 }
             }
         }
     }
-
 }
 
 @Preview

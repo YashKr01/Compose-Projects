@@ -16,4 +16,6 @@ object Constants {
 
     const val BASE_URL = "http://127.0.0.1:8081"
 
+    const val MIN_BACKGROUND_IMAGE_HEIGHT = 0.4f
+
 }
