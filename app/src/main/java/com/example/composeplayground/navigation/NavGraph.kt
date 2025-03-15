@@ -7,6 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.composeplayground.presentation.details.DetailsScreen
 import com.example.composeplayground.presentation.screens.welcome.WelcomeScreen
 import com.example.composeplayground.presentation.screens.home.HomeScreen
 import com.example.composeplayground.presentation.screens.search.SearchScreen
@@ -27,10 +28,8 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(route = Screen.Home.route) { HomeScreen(navController = navController) }
         composable(
             route = Screen.Details.route,
-            arguments = listOf(navArgument(Constants.DETAILS_ARGUMENT_KEY) {
-                type = NavType.IntType
-            })
-        ) { }
+            arguments = listOf(navArgument(Constants.DETAILS_ARGUMENT_KEY) { type = NavType.IntType })
+        ) { DetailsScreen(navController) }
         composable(route = Screen.Search.route) { SearchScreen(navController = navController) }
     }
 }
