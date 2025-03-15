@@ -5,7 +5,7 @@
 ### **Samples**
 | Clean Arch Stock App | Grocery App UI | Anime Characters |
 -----------------------|---------------------- | ------------ |
-| <img height="350" align="center" src="samples/video_stock_app.gif" /> | <img height="350" align="center" src="samples/grocery.jpeg" /> | <img height="350" align="center" src="samples/video_crypto.gif" /> |
+| <img height="350" align="center" src="samples/video_stock_app.gif" /> | <img height="350" align="center" src="samples/grocery.jpeg" /> | <img height="350" align="center" src="samples/Screen_recording_20250315_212949-ezgif.com-optimize.gif" /> |
 
 | Clean Architecture </br> CryptoCurrency App | Clean Architecture </br> Form Validation| Clean Arch Dictionary </br> with Caching | Clean Arch Notes |
 ------------|------------|------------|------------|
