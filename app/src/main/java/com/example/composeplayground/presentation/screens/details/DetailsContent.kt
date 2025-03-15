@@ -1,5 +1,6 @@
 package com.example.composeplayground.presentation.screens.details
 
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.BottomSheetScaffoldState
 import androidx.compose.material.BottomSheetValue
@@ -35,6 +37,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.AsyncImage
@@ -43,6 +46,8 @@ import com.example.composeplayground.R
 import com.example.composeplayground.domain.model.Hero
 import com.example.composeplayground.presentation.components.InfoBox
 import com.example.composeplayground.presentation.components.OrderedList
+import com.example.composeplayground.ui.theme.EXPANDED_RADIUS_LEVEL
+import com.example.composeplayground.ui.theme.EXTRA_LARGE_PADDING
 import com.example.composeplayground.ui.theme.INFO_ICON_SIZE
 import com.example.composeplayground.ui.theme.LARGE_PADDING
 import com.example.composeplayground.ui.theme.MEDIUM_PADDING
@@ -66,10 +71,19 @@ fun DetailsContent(
 
     val currentSheetFraction = scaffoldState.currentSheetFraction
 
+    val radiusAnim by animateDpAsState(
+        targetValue = if (currentSheetFraction == 1f) LARGE_PADDING else EXPANDED_RADIUS_LEVEL,
+        label = ""
+    )
+
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
         sheetPeekHeight = MIN_SHEET_HEIGHT,
         sheetContent = { selectedHero?.let { BottomSheetContent(selectedHero = it) } },
+        sheetShape = RoundedCornerShape(
+            topStart = radiusAnim,
+            topEnd = radiusAnim
+        ),
         content = {
             selectedHero?.let { hero ->
                 BackgroundContent(
