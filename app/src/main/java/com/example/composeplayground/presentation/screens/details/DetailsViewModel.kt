@@ -1,5 +1,6 @@
 package com.example.composeplayground.presentation.screens.details
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -10,8 +11,11 @@ import com.example.composeplayground.domain.usecases.UseCases
 import com.example.composeplayground.utils.Constants.DETAILS_ARGUMENT_KEY
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,4 +35,24 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
+    private val _uiEvent = MutableSharedFlow<UiEvent>()
+    val uiEvent: SharedFlow<UiEvent> = _uiEvent.asSharedFlow()
+
+    private val _colorPalette: MutableState<Map<String, String>> = mutableStateOf(mapOf())
+    val colorPalette: State<Map<String, String>> = _colorPalette
+
+    fun generateColorPalette() {
+        viewModelScope.launch {
+            _uiEvent.emit(UiEvent.GenerateColorPalette)
+        }
+    }
+
+    fun setColorPalette(colors: Map<String, String>) {
+        _colorPalette.value = colors
+    }
+
+}
+
+sealed class UiEvent {
+    object GenerateColorPalette : UiEvent()
 }

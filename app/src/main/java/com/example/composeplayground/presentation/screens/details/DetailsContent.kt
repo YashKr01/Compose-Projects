@@ -1,5 +1,6 @@
 package com.example.composeplayground.presentation.screens.details
 
+import android.graphics.Color.parseColor
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
@@ -25,8 +26,11 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.material.rememberBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -37,7 +41,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.AsyncImage
@@ -47,7 +50,6 @@ import com.example.composeplayground.domain.model.Hero
 import com.example.composeplayground.presentation.components.InfoBox
 import com.example.composeplayground.presentation.components.OrderedList
 import com.example.composeplayground.ui.theme.EXPANDED_RADIUS_LEVEL
-import com.example.composeplayground.ui.theme.EXTRA_LARGE_PADDING
 import com.example.composeplayground.ui.theme.INFO_ICON_SIZE
 import com.example.composeplayground.ui.theme.LARGE_PADDING
 import com.example.composeplayground.ui.theme.MEDIUM_PADDING
@@ -56,14 +58,31 @@ import com.example.composeplayground.ui.theme.SMALL_PADDING
 import com.example.composeplayground.ui.theme.titleColor
 import com.example.composeplayground.utils.Constants.BASE_URL
 import com.example.composeplayground.utils.Constants.MIN_BACKGROUND_IMAGE_HEIGHT
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import androidx.compose.material.IconButton as IconButton1
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DetailsContent(
     navController: NavHostController,
-    selectedHero: Hero?
+    selectedHero: Hero?,
+    colors: Map<String, String>
 ) {
+
+    var vibrant by remember { mutableStateOf("#000000") }
+    var darkVibrant by remember { mutableStateOf("#000000") }
+    var onDarkVibrant by remember { mutableStateOf("#ffffff") }
+
+    LaunchedEffect(key1 = selectedHero) {
+        vibrant = colors["vibrant"]!!
+        darkVibrant = colors["darkVibrant"]!!
+        onDarkVibrant = colors["onDarkVibrant"]!!
+    }
+
+    val systemUiController = rememberSystemUiController()
+    systemUiController.setStatusBarColor(
+        color = Color(parseColor(darkVibrant))
+    )
 
     val scaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Expanded)
@@ -79,7 +98,16 @@ fun DetailsContent(
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
         sheetPeekHeight = MIN_SHEET_HEIGHT,
-        sheetContent = { selectedHero?.let { BottomSheetContent(selectedHero = it) } },
+        sheetContent = {
+            selectedHero?.let {
+                BottomSheetContent(
+                    selectedHero = it,
+                    infoBoxColor = Color(parseColor(vibrant)),
+                    sheetBackgroundColor = Color(parseColor(darkVibrant)),
+                    contentColor = Color(parseColor(onDarkVibrant))
+                )
+            }
+        },
         sheetShape = RoundedCornerShape(
             topStart = radiusAnim,
             topEnd = radiusAnim
@@ -89,7 +117,7 @@ fun DetailsContent(
                 BackgroundContent(
                     heroImage = hero.image,
                     imageFraction = currentSheetFraction,
-//                    backgroundColor = Color(parseColor(darkVibrant)),
+                    backgroundColor = Color(parseColor(darkVibrant)),
                     onCloseClicked = { navController.popBackStack() }
                 )
             }
