@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -28,17 +30,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import com.example.composeplayground.R
+import com.example.composeplayground.domain.model.Hero
 import com.example.composeplayground.ui.theme.DarkGray
 import com.example.composeplayground.ui.theme.LightGray
 import com.example.composeplayground.ui.theme.NETWORK_ERROR_ICON_HEIGHT
 import com.example.composeplayground.ui.theme.SMALL_PADDING
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 import kotlin.math.log
 
 @Composable
-fun EmptyScreen(error: LoadState.Error? = null) {
+fun EmptyScreen(
+    error: LoadState.Error? = null,
+    heroes: LazyPagingItems<Hero>? = null
+) {
 
     var message by remember {
         mutableStateOf("Find your favourite Hero! ")
@@ -64,35 +73,62 @@ fun EmptyScreen(error: LoadState.Error? = null) {
         startAnimation = true
     }
 
-    EmptyContent(alphaAnim, icon, message)
+    EmptyContent(
+        alphaAnim = alphaAnim,
+        icon = icon,
+        message = message,
+        heroes = heroes,
+        error = error
+    )
 
 }
 
 @Composable
-fun EmptyContent(alphaAnim: Float, icon: Int, message: String) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+fun EmptyContent(
+    alphaAnim: Float,
+    icon: Int,
+    message: String,
+    heroes: LazyPagingItems<Hero>? = null,
+    error: LoadState.Error? = null,
+) {
+
+    var isRefreshing by remember { mutableStateOf(false) }
+
+    SwipeRefresh(
+        state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
+        onRefresh = {
+            isRefreshing = true
+            heroes?.refresh()
+            isRefreshing = false
+        },
+        swipeEnabled = error != null
     ) {
-        Icon(
+        Column(
             modifier = Modifier
-                .size(NETWORK_ERROR_ICON_HEIGHT)
-                .alpha(alphaAnim),
-            painter = painterResource(id = icon),
-            contentDescription = "ERROR",
-            tint = if (isSystemInDarkTheme()) LightGray else DarkGray
-        )
-        Text(
-            modifier = Modifier
-                .padding(top = SMALL_PADDING)
-                .alpha(alphaAnim),
-            text = message,
-            color = if (isSystemInDarkTheme()) LightGray else DarkGray,
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Medium,
-            fontSize = MaterialTheme.typography.subtitle1.fontSize
-        )
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                modifier = Modifier
+                    .size(NETWORK_ERROR_ICON_HEIGHT)
+                    .alpha(alphaAnim),
+                painter = painterResource(id = icon),
+                contentDescription = "ERROR",
+                tint = if (isSystemInDarkTheme()) LightGray else DarkGray
+            )
+            Text(
+                modifier = Modifier
+                    .padding(top = SMALL_PADDING)
+                    .alpha(alphaAnim),
+                text = message,
+                color = if (isSystemInDarkTheme()) LightGray else DarkGray,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Medium,
+                fontSize = MaterialTheme.typography.subtitle1.fontSize
+            )
+        }
     }
 }
 
